@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "description": "Provides registers",
   "activationEvents": {
-    "registers:insert" : ".editor",
-    "registers:delete" : ".editor",
     "registers:save" : ".editor",
+    "registers:insert" : ".editor",
+    "registers:delete" : ".workspace",
+    "registers:delete-all" : ".workspace",
     "registers:insert-quick" : ".editor",
     "registers:copy-to-quick" : ".editor",
     "registers:cut-to-quick" : ".editor"

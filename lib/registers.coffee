@@ -10,9 +10,10 @@ module.exports =
   activate: (state) ->
     @selectView = new RegistersSelectView()
     @nameView = new RegistersNameView()
+    atom.workspaceView.command "registers:save", => @save()
     atom.workspaceView.command "registers:insert", => @show('insert')
     atom.workspaceView.command "registers:delete", => @show('delete')
-    atom.workspaceView.command "registers:save", => @save()
+    atom.workspaceView.command "registers:delete-all", => @deleteAll()
     atom.workspaceView.command "registers:insert-quick", => @insertQuick()
     atom.workspaceView.command "registers:copy-to-quick", => @copyToQuick(false)
     atom.workspaceView.command "registers:cut-to-quick", => @copyToQuick(true)
@@ -80,3 +81,6 @@ module.exports =
       return value + '\n'
 
     return null
+
+  deleteAll: ->
+    entries.deleteAll()

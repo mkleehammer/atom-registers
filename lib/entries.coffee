@@ -1,8 +1,5 @@
 
-entries = [
-  { name: 'quick', value: 'testing' },
-  { name: 'xyzzy', value: 'testing' },
-]
+entries = []
 
 module.exports =
   setAll: (e) ->
@@ -10,6 +7,9 @@ module.exports =
 
   getAll: ->
     entries
+
+  deleteAll: ->
+    entries = []
 
   get: (name) ->
     for entry in entries
