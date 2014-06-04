@@ -1,0 +1,21 @@
+{
+  "name": "registers",
+  "main": "./lib/registers",
+  "version": "0.0.0",
+  "description": "Provides registers",
+  "activationEvents": {
+    "registers:insert" : ".editor",
+    "registers:delete" : ".editor",
+    "registers:save" : ".editor",
+    "registers:insert-quick" : ".editor",
+    "registers:copy-to-quick" : ".editor",
+    "registers:cut-to-quick" : ".editor"
+  },
+  "repository": "https://github.com/mkleehammer/atom-registers",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+  }
+}

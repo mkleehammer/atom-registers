@@ -1,0 +1,5 @@
+
+'.platform-darwin .workspace .editor':
+  'cmd-k cmd-v' : 'registers:insert-quick'
+  'cmd-k cmd-c' : 'registers:copy-to-quick'
+  'cmd-k cmd-x' : 'registers:cut-to-quick'
