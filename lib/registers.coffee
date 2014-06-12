@@ -10,23 +10,22 @@ module.exports =
   activate: (state) ->
     @selectView = new RegistersSelectView()
     @nameView = new RegistersNameView()
-    atom.workspaceView.command "registers:save", => @save()
-    atom.workspaceView.command "registers:insert", => @show('insert')
+    atom.workspaceView.command "registers:copy", => @copy()
+    atom.workspaceView.command "registers:paste", => @show('paste')
     atom.workspaceView.command "registers:delete", => @show('delete')
     atom.workspaceView.command "registers:delete-all", => @deleteAll()
-    atom.workspaceView.command "registers:insert-quick", => @insertQuick()
-    atom.workspaceView.command "registers:copy-to-quick", => @copyToQuick(false)
-    atom.workspaceView.command "registers:cut-to-quick", => @copyToQuick(true)
-    # if state.entries
-    #     entries.set(entries)
+    atom.workspaceView.command "registers:paste-quick", => @pasteQuick()
+    atom.workspaceView.command "registers:copy-quick", => @copyQuick(false)
+    atom.workspaceView.command "registers:cut-quick", => @copyQuick(true)
 
-  # xyzzy
+    if Array.isArray(state.entries) and state.entries.length
+      entries.setAll(state.entries)
 
   deactivate: ->
     @selectView.destroy()
 
   serialize: ->
-    # entries: entries.get()
+    return { entries: entries.getAll() }
 
   getActiveView: ->
     v = atom.workspaceView.getActiveView()
@@ -39,18 +38,25 @@ module.exports =
     v = @getActiveView()
     @selectView.show(action, v) if v
 
-  insertQuick: ->
-    entry = entries.get('quick')
+  deleteEntry: (entry) ->
+    # The user has chosen an item to delete.
+    entries.delete(entry.name)
+
+  pasteEntry: (entry) ->
+    # The user has chosen an entry to paste into the document.
     view = @getActiveView()
-    if entry and view
+    if view
       view.getEditor().insertText(entry.value)
 
-  copyToQuick: (cut) ->
-    value = @getSelection(cut)
-    if value
-      entries.set('quick', value)
+  pasteQuick: ->
+    entry = entries.get('quick')
+    @pasteEntry(entry) if entry
 
-  save: () ->
+  copyQuick: (cut) ->
+    value = @getSelection(cut)
+    entries.set('quick', value) if value
+
+  copy: () ->
     value = @getSelection(false)
     console.log('save:', value)
     # x = new RegistersNameView()

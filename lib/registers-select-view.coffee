@@ -24,19 +24,15 @@ class RegistersSelectView extends SelectListView
   confirmed: (entry) ->
     @cancel()
 
-    if @action is 'delete'
-      entries.delete(entry.name)
-    else if @action is 'insert'
-      @targetView.getEditor().insertText(entry.value)
+    @callback(entry)
 
   attach: ->
     @storeFocusedElement()
     atom.workspaceView.appendToTop(this)
     @focusFilterEditor()
 
-  show: (action, view) ->
-    @action = action # 'insert' or 'delete'
-    @targetView = view # used with insert; null for delete
+  show: (callback) ->
+    @callback = callback
     @setItems(entries.getAll())
     @attach()
 
