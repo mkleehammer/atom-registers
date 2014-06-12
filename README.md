@@ -1,33 +1,65 @@
 # registers package
 
-Provides "registers" which are like named clipboard entries.  Text can be saved
-to registers and inserted from it.
+Provides "registers" which are like named clipboard entries.  Text can be saved to registers
+and inserted from them later.
 
-A special register named "quick" can be accessed with the following keys:
+Registers are named using strings, so they can be given names as descriptive as necessary.  A
+special register named "quick" can be accessed with the following keys:
 
 * `cmd-k cmd-c` - copy to the "quick" register
 * `cmd-k cmd-x` - cut to the "quick" register
-* `cmd-k cmd-v` - past from "quick" register
+* `cmd-k cmd-v` - paste from the "quick" register
 
 ## Commands
 
-### Register Copy
+### Registers : Copy
 
-The collection of registers begins empty.  To copy text into a register use the
-Register Copy function.  It will ask you to name the register and copy the current
-text to it.
+The collection of registers begins empty.  To copy text into a register use the Register : Copy
+function.  It will ask you to name the register and copy the current text to it.
 
-If there is a single selection, the selected text is copied.  
+![Screenshot](http://mkleehammer.github.com/atom-registers/images/save.png)
 
+If there is a single selection the selected text is copied, otherwise the current line is
+copied.
 
-, overwriting the register if one already exis
+At this time multiple selections are not supported -- the text from the last selection is
+copied.
 
+### Registers : Copy Quick
 
-## Future Improvements
+The `cmd-k cmd-c` shortcut executes this command which is a copy, but to a register named
+"quick", skipping the "Save To Register" dialog.
 
-At this time only a single selection is used.  If there are multiple selections,
-Insert Selection will save the last.  I do not how multiple selections would be
-put back into the document.
+### Registers : Paste
 
-There are no rectangular registers.  Ideally the register should record whether
-or not the selection was rectangular and it could paste appropriately.
+To paste a register that has been copied, simply use the Register : Paste command.  it will
+display a list of all registers and you can use fuzzy matching for the name.  Matches does not
+currently search the copied text.
+
+![Screenshot](http://mkleehammer.github.com/atom-registers/images/list.png)
+
+### Registers : Paste Quick
+
+The `cmd-k cmd-v` shortcut executes this command which pastes tjhe contents of the register
+named "quick".
+
+### Registers : Cut
+
+Registers : Cut is simply a Register : Copy but then the selection is deleted.
+
+### Registers : Cut Quick
+
+The `cmd-k cmd-x` shortcut cuts the current text to a register named "quick".
+
+### Registers : Delete
+
+Displays the list of registers and deletes the selected one.
+
+### Registers : Delete All
+
+As you would expect, all registers are deleted.
+
+## Restart
+
+The contents of registers are serialized with the project so they are available
+after restarting Atom.
