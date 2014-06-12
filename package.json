@@ -1,22 +1,21 @@
 {
   "name": "registers",
   "main": "./lib/registers",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Provides registers",
   "activationEvents": {
-    "registers:copy" : ".editor",
-    "registers:paste" : ".editor",
-    "registers:delete" : ".workspace",
-    "registers:delete-all" : ".workspace",
-    "registers:paste-quick" : ".editor",
-    "registers:copy-quick" : ".editor",
-    "registers:cut-quick" : ".editor"
+    "registers:copy": ".editor",
+    "registers:paste": ".editor",
+    "registers:delete": ".workspace",
+    "registers:delete-all": ".workspace",
+    "registers:paste-quick": ".editor",
+    "registers:copy-quick": ".editor",
+    "registers:cut-quick": ".editor"
   },
   "repository": "https://github.com/mkleehammer/atom-registers",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
