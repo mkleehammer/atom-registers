@@ -11,8 +11,8 @@ module.exports =
     @selectView = new RegistersSelectView()
     @nameView = new RegistersNameView()
     atom.workspaceView.command "registers:copy", => @copy()
-    atom.workspaceView.command "registers:paste", => @show('paste')
-    atom.workspaceView.command "registers:delete", => @show('delete')
+    atom.workspaceView.command "registers:paste", => @paste()
+    atom.workspaceView.command "registers:delete", => @deleteOne()
     atom.workspaceView.command "registers:delete-all", => @deleteAll()
     atom.workspaceView.command "registers:paste-quick", => @pasteQuick()
     atom.workspaceView.command "registers:copy-quick", => @copyQuick(false)
@@ -34,23 +34,15 @@ module.exports =
       return v
     return null
 
-  show: (action) ->
-    v = @getActiveView()
-    @selectView.show(action, v) if v
+  paste: ->
+    @selectView.show (entry) => @getActiveView()?.getEditor().insertText(entry.value)
 
-  deleteEntry: (entry) ->
-    # The user has chosen an item to delete.
-    entries.delete(entry.name)
-
-  pasteEntry: (entry) ->
-    # The user has chosen an entry to paste into the document.
-    view = @getActiveView()
-    if view
-      view.getEditor().insertText(entry.value)
+  deleteOne: ->
+    @selectView.show (entry) -> entries.delete(entry.name)
 
   pasteQuick: ->
     entry = entries.get('quick')
-    @pasteEntry(entry) if entry
+    @getActiveView()?.getEditor().insertText(entry.value) if entry
 
   copyQuick: (cut) ->
     value = @getSelection(cut)
@@ -58,10 +50,7 @@ module.exports =
 
   copy: () ->
     value = @getSelection(false)
-    console.log('save:', value)
-    # x = new RegistersNameView()
-    # x.attach()
-    @nameView.show(value)
+    @nameView.show (name) -> entries.set(name, value)
 
   getSelection: (cut) ->
     # Returns the selected text in the editor or the current line, used

@@ -7,24 +7,21 @@ class RegistersSelectView extends SelectListView
   initialize: ->
     super
     @addClass('registers-select-view overlay from-top')
-
-  serialize: ->
+    @callback = null
 
   getFilterKey: -> 'name'
 
   @cancel: ->
+    @callback = null
     super
-    @action = null
-    @targetView = null
 
   destroy: ->
     @cancel()
     @detach()
 
   confirmed: (entry) ->
-    @cancel()
-
     @callback(entry)
+    @cancel()
 
   attach: ->
     @storeFocusedElement()
@@ -33,7 +30,8 @@ class RegistersSelectView extends SelectListView
 
   show: (callback) ->
     @callback = callback
-    @setItems(entries.getAll())
+    items = entries.getAll()
+    @setItems(items)
     @attach()
 
   viewForItem: (entry) ->

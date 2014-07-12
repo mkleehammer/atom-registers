@@ -16,17 +16,23 @@ class RegistersNameView extends View
   initialize: ->
     @on 'core:confirm', => @confirm()
     @on 'core:cancel', => @detach()
+    @callback = null
 
-  show: (value) ->
-    @value = value
+  show: (callback) ->
+    @callback = callback
     if not @hasParent()
       @attach()
 
   confirm: ->
     name = @miniEditor.getText()
     if name
-      entries.set(name, @value)
+      @callback(name)
+      @callback = null
       @detach()
+
+  cancel: ->
+    @callback = null
+    super()
 
   destroy: ->
     @detach()
