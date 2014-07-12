@@ -1,7 +1,7 @@
 {
   "name": "registers",
   "main": "./lib/registers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Provides registers",
   "activationEvents": {
     "registers:copy": ".editor",
