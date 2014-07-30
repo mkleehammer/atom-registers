@@ -19,7 +19,7 @@ function.  It will ask you to name the register and copy the current text to it.
 
 ![Screenshot](http://mkleehammer.github.com/atom-registers/images/save.png)
 
-If there is a single selection the selected text is copied, otherwise the current line is
+If there is a selection the selected text is copied, otherwise the current line is
 copied.
 
 At this time multiple selections are not supported -- the text from the last selection is
@@ -32,15 +32,15 @@ The `cmd-k cmd-c` shortcut executes this command which is a copy, but to a regis
 
 ### Registers : Paste
 
-To paste a register that has been copied, simply use the Register : Paste command.  it will
-display a list of all registers and you can use fuzzy matching for the name.  Matches does not
+To paste a register that has been copied, use the Register : Paste command.  It will
+display a list of all registers and you can use fuzzy matching for the name.  The matching does not
 currently search the copied text.
 
 ![Screenshot](http://mkleehammer.github.com/atom-registers/images/list.png)
 
 ### Registers : Paste Quick
 
-The `cmd-k cmd-v` shortcut executes this command which pastes tjhe contents of the register
+The `cmd-k cmd-v` shortcut executes this command which pastes the contents of the register
 named "quick".
 
 ### Registers : Cut
