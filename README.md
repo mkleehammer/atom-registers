@@ -1,5 +1,7 @@
 # registers package
 
+**This package has been unpublished because I am no longer using Atom.  Let me know if you are willing to take this project over.**
+
 Provides "registers" which are like named clipboard entries.  Text can be saved to registers
 and inserted from them later.
 
